@@ -5,12 +5,13 @@ export const registerUser = async (req, res) => {
 
         const newUser = new Users(req.body);
 
-       const savedUser = await newUser.save();
+        const savedUser = await newUser.save();
 
-       console.log(`Hey! ${savedUser.name} your Account has been created`);
+        res.json(`Hey! ${savedUser.name} your Account has been created`);
+
 
     } catch (err) {
         console.log(err);
         return;
     }
-}
+};

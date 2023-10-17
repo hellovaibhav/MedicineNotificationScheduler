@@ -1,9 +1,12 @@
 import express from "express";
-import schedule from "node-schedule";
+import cron from "node-schedule";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+
+// routes
 import authRoute from "./routes/authRoute.js";
 import homeRoute from "./routes/homeRoute.js";
+import notificationRoute from "./routes/notificationRoute.js";
 
 const app = express();
 
@@ -27,8 +30,9 @@ mongoose.connection.on("disconnected", () => {
 });
 
 // routes
-app.use("/", homeRoute)
-app.use("/auth", authRoute)
+app.use("/", homeRoute);
+app.use("/auth", authRoute);
+app.use("/notify", notificationRoute);
 
 app.listen(port, () => {
     connect();
