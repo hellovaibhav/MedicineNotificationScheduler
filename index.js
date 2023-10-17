@@ -2,11 +2,13 @@ import express from "express";
 import cron from "node-schedule";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import moment from "moment";
 
 // routes
 import authRoute from "./routes/authRoute.js";
 import homeRoute from "./routes/homeRoute.js";
 import notificationRoute from "./routes/notificationRoute.js";
+import Notifications from "./models/Notifications.js";
 
 const app = express();
 
@@ -27,6 +29,18 @@ const connect = () => {
 
 mongoose.connection.on("disconnected", () => {
     console.log("Database is disconnected");
+});
+
+cron.scheduleJob('* * * * *', async () => {
+    try {
+        const currentTime = moment().format('HH:mm');
+
+        const notifications = await Notifications.find({ reminderTimes: currentTime });
+
+        console.log(`message sent to ${notifications}`)
+    } catch (error) {
+        console.error('Error in cron job:', error);
+    }
 });
 
 // routes

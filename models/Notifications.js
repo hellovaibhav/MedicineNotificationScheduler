@@ -12,8 +12,8 @@ const notificationSchema = new mongoose.Schema({
         required: true
     },
     reminderTimes: [String],
-}, { timestamp: true });
+}, { timestamps: true });
 
-notificationSchema.index({ field1: 1, field2: 1 }, { unique: true });
+notificationSchema.index({ userId: 1, medicineName: 1 }, { unique: true });
 
 export default mongoose.model("Notifications", notificationSchema);
