@@ -36,7 +36,7 @@ export const loginUser = async (req, res) => {
 
 
         if (bcrypt.compareSync(req.body.password, foundUser.password)) {
-            var token = jwt.sign({ userId: foundUser._id }, process.env.SECRET);
+            var token = jwt.sign({ usersId: foundUser._id }, process.env.SECRET);
 
             res.cookie("verificationToken", token).status(200).json(`welcome ${foundUser.name}, you can set your medicine reminders now`);
             return;

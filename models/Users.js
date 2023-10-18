@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
     careTakerName: {
         type: String
     },
-    careTakePhone: {
+    careTakerPhone: {
         type: Number
     },
     careTakerEmail: {
