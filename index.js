@@ -103,8 +103,8 @@ cron.scheduleJob('* * * * *', async () => {
                         from: senderMail,
                         to: target.userId.careTakerEmail,
                         subject: `Time for ${target.userId.name}'s  ${target.medicineName}`,
-                        text: `$ Hey care taker of ${target.userId.name} it's time for him/her to take the dose of ${target.medicineName}, if he/she no longer take's this medicine please delete this reminder`,
-                        html: `<html><body align=\"center\" bgcolor=\"#EDF1D6\"><br><h3> Hey care taker of ${target.userId.name} its time for him/her to take dose of </h3><br><h1>${target.medicineName}</h1><br><p>If he/she no longer take's this medicine, kindly delete the notification setting from your account</p> <br><br><p align=\"left\"> This is a system generated email. Please do not reply to this message. </p> <br><br><div align=\"left\"><h4>Medicine Notifier</h4><h5>Reminder Mail <br>dev.vbhv@gmail.com<br></h5><h6>IIIT Ranchi, Ranchi, Jharkhand</h6></div></body></html>`
+                        text: ` Hey ${target.userId.careTakerName} it's time for ${target.userId.name}'s dose of ${target.medicineName}, if he/she no longer take's this medicine please delete this reminder`,
+                        html: `<html><body align=\"center\" bgcolor=\"#EDF1D6\"><br><h3> Hey ${target.userId.careTakerName} it's time for ${target.userId.name}'s dose of </h3><br><h1>${target.medicineName}</h1><br><p>If he/she no longer take's this medicine, kindly delete the notification setting from your account</p> <br><br><p align=\"left\"> This is a system generated email. Please do not reply to this message. </p> <br><br><div align=\"left\"><h4>Medicine Notifier</h4><h5>Reminder Mail <br>dev.vbhv@gmail.com<br></h5><h6>IIIT Ranchi, Ranchi, Jharkhand</h6></div></body></html>`
                     };
 
                     transporter.sendMail(mailOptions, function (error, info) {
@@ -119,7 +119,7 @@ cron.scheduleJob('* * * * *', async () => {
                     try {
                         await client.messages
                             .create({
-                                body: `$ Hey care taker of ${target.userId.name} it's time for him/her to take the dose of ${target.medicineName}, if he/she no longer take's this medicine please delete this reminder`,
+                                body: ` Hey ${target.userId.careTakerName} it's time for ${target.userId.name}'s dose of ${target.medicineName}, if he/she no longer take's this medicine please delete this reminder`,
                                 from: process.env.PHONE_NUMBER,
                                 to: `+91${target.userId.careTakerPhone}`
                             })
