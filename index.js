@@ -3,7 +3,7 @@ import cron from "node-schedule";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import moment from "moment";
-
+import cookieParser from "cookie-parser";
 // routes
 import authRoute from "./routes/authRoute.js";
 import homeRoute from "./routes/homeRoute.js";
@@ -27,6 +27,8 @@ const connect = () => {
     }
 };
 
+app.use(cookieParser());
+
 mongoose.connection.on("disconnected", () => {
     console.log("Database is disconnected");
 });
@@ -37,7 +39,9 @@ cron.scheduleJob('* * * * *', async () => {
 
         const notifications = await Notifications.find({ reminderTimes: currentTime });
 
-        console.log(`message sent to ${notifications}`)
+        if (notifications.length != 0) {
+            console.log("message sent");
+        }
     } catch (error) {
         console.error('Error in cron job:', error);
     }
